@@ -7,7 +7,7 @@ export const Notification=(): JSX.Element=>{
     setTimeout(() => setMessage({
         details: message.details,
         content: '',
-        error: false
+        error: true
     }), 3000);
     return  <div className="messageContainer">
         <div className={`message ${message.error?"error":"success"}`}>

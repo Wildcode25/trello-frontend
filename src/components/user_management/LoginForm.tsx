@@ -7,7 +7,7 @@ interface Props{
   setPage: (page: boolean)=>void
 }
 export function LoginForm({page, setPage}:Props):JSX.Element{
-    const {formData, onChangeInput, handleLoginSubmit} =useForm({page})
+    const {formData, handleLoginSubmit} =useForm({page})
     const {email, password} = formData
     return <form onSubmit={handleLoginSubmit} className="userManagementForm" action="">
         <div className="flex gap-8 flex-col">
@@ -15,8 +15,8 @@ export function LoginForm({page, setPage}:Props):JSX.Element{
             <p className="font-bold text-slate-600 text-m">Inicia sesión para continuar</p>
         </div>
         <div className="flex-col items-center flex gap-2">
-          <InputForm type="text" onChangeHandler={onChangeInput} placeholder="Introduce tu correo electronico" value={email} id={"email"}/>
-          <InputForm type="password" onChangeHandler={onChangeInput} placeholder="Introduce tu contraseña" value={password} id={"password"}/>
+          <InputForm type="text" placeholder="Introduce tu correo electronico" value={email} id={"email"}/>
+          <InputForm type="password" placeholder="Introduce tu contraseña" value={password} id={"password"}/>
           <button className="submit" type="submit">Iniciar sesión</button>
         </div>
         <div className="flex gap-4 items-center">
