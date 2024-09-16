@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  .userManagementForm{
+    @apply w-[400px] min-h-screen flex justify-center pt-8;
+  }
+}
