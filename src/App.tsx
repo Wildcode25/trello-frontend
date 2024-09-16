@@ -7,7 +7,8 @@ function App(): JSX.Element {
   return (
     <NotificationProvider>
        <UserManagementLayout />
-       
+       <Notification/>
+
       </NotificationProvider>
     
   )

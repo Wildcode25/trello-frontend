@@ -8,7 +8,7 @@ interface Props{
   page: boolean
 }
 export function RegisterForm({setPage, page}:Props):JSX.Element{
-    const {onChangeInput, formData, handleRegisterUser}=useForm()
+    const {onChangeInput, formData, handleRegisterUser}=useForm({page})
     const {email, password, name, confirmPassword} = formData
     return <form onSubmit={handleRegisterUser} className="userManagementForm">
     <div className="flex gap-8 flex-col">

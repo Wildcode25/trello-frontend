@@ -8,7 +8,7 @@ interface Props{
   setPage: (page: boolean)=>void
 }
 export function LoginForm({page, setPage}:Props):JSX.Element{
-    const {formData, onChangeInput, handleLoginSubmit}=useForm()
+    const {formData, onChangeInput, handleLoginSubmit} =useForm({page})
     const {email, password} = formData
     return <form onSubmit={handleLoginSubmit} className="userManagementForm" action="">
         <div className="flex gap-8 flex-col">
@@ -23,7 +23,7 @@ export function LoginForm({page, setPage}:Props):JSX.Element{
         <div className="flex gap-4 items-center">
           <a href="#" className="anchor">¿No puedes iniciar sesión?</a>
           <div className="w-[3px] h-[3px] bg-blue-600 rounded-full"></div>
-          <a onClick={()=>setPage(!page)} href="#" className="anchor">Crea una cuenta</a>
+          <a onClick={()=>{setPage(!page)}} href="#" className="anchor">Crea una cuenta</a>
           
         </div>
         <hr className="bg-gray-400 h-[2px] w-80"/>
