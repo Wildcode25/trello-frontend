@@ -1,4 +1,3 @@
-import React from "react"
 import { TrelloSvg } from "../assets_componentes/TrelloSvg.tsx"
 import { AtlassiaSvg } from "../assets_componentes/AtlassiaSvg.tsx"
 import { InputForm } from "./InputForm.tsx"
@@ -23,7 +22,7 @@ export function RegisterForm({setPage, page}:Props):JSX.Element{
       <button className="submit" type="submit">Registrarse</button>
     </div>
     <div className="flex gap-4 items-center">
-      <a onClick={()=>setPage(!page)} href="#" className="anchor">¿Ya tienes una cuenta? inisia sesión</a>
+      <a onClick={()=>setPage(!page)} href="#" className="anchor">¿Ya tienes una cuenta? inicia sesión</a>
       
     </div>
     <hr className="bg-gray-400 h-[2px] w-80"/>

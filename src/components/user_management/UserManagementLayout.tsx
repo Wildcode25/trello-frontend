@@ -1,7 +1,7 @@
-import React, { useState } from "react"
 import {LoginForm} from './LoginForm.tsx'
 import '../components_styles/UserManagementLayout.css'
 import { RegisterForm } from "./RegisterForm.tsx"
+import { useState } from 'react'
 export function UserManagementLayout():JSX.Element{
     const [page, setPage]=useState(true)
     return (

@@ -1,4 +1,3 @@
-import React from "react"
 import { AtlassiaSvg } from "../assets_componentes/AtlassiaSvg.tsx"
 import { TrelloSvg } from "../assets_componentes/TrelloSvg.tsx"
 import { InputForm } from "./InputForm.tsx"

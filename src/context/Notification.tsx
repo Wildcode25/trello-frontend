@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useState } from "react";
-import React from "react";
 import { ErrorDetails } from "../types";
 
 interface Message {
