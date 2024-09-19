@@ -1,13 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import { UserService } from "../services/UserService.ts";
 import { useNotification } from "./useNotification.ts";
-import type { ErrorDetails } from "../types";
+import type { ErrorDetails, UserResponse } from "../types";
 import { FormContext } from "../context/FormContext.tsx";
-import type { Response } from "../types.ts";
+import { useUser } from "./useUser.ts";
 interface Props{
     page?: boolean
 }
 export function useForm({page}:Props) {
+    const {setUser} = useUser()
     const { setMessage, message } = useNotification()
     const context = useContext(FormContext)
     if(!context) throw new Error('No usar ')
@@ -50,7 +51,7 @@ export function useForm({page}:Props) {
         setformData({ name: '', email: '', password: '', confirmPassword: '' })
         
     }
-    const verifyResult = ({data, message, error}:Response)=>{
+    const verifyResult = ({data, message, error}:UserResponse)=>{
         if (Array.isArray(data) && error){
             showValidationErrorDetails(data)    
             return setMessage({
@@ -64,6 +65,7 @@ export function useForm({page}:Props) {
             content: message,
             error
         })
+        if(data && 'email'in data)setUser(data)
     } 
     async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()

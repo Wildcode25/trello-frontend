@@ -1,17 +1,18 @@
 import { UserManagementLayout } from './components/user_management/UserManagementLayout.tsx'
-import { NotificationProvider } from './context/Notification.tsx'
 import { Notification } from './components/Notification.tsx'
-import { FormContextProvider } from './context/FormContext.tsx'
+import { Home } from './components/Home/Home.tsx'
+import { useUser } from './hooks/useUser.ts'
 function App(): JSX.Element {
-
+  const { user} = useUser()
   return (
-    <NotificationProvider>
-       <FormContextProvider>
-       <UserManagementLayout />
-       </FormContextProvider>
+      <>
+        {user ? <Home />:
+       <UserManagementLayout />}
+       
        <Notification/>
+      </>
 
-      </NotificationProvider>
+      
     
   )
 }
