@@ -1,8 +1,10 @@
+import { useBoard } from "../../hooks/useBoard.ts"
 export const Header = ()=>{
-    return <header className="bg-rose-600  py-2 flex items-center justify-between">
+    const {board} = useBoard()
+    return <header className={`bg-gradient-to-l from-${board?.color}-600 to-${board?.color}-600  py-3 flex items-center justify-between`}>
     <div className="flex gap-3 px-6 items-center">
-    <h2 className="text-xl font-bold">Mini-Proyecto</h2>
-    <i className="fi fi-rr-star px-2 py-1 scale-75 hover:bg-gray-400/25"></i>
+    <h2 className="text-xl font-bold">{board?.name}</h2>
+    <i className="fi fi-rr-star px-2 py-1 scale-75 hover:bg-gray-400/50"></i>
     <div className="flex items-center gap-4">
     <i className="fi fi-ts-employees"></i>
     <button className="text-black p-[6px] px-[10px] bg-slate-200 rounded-sm text-sm"><i className="scale-50 fi fi-br-bars-filter"></i> Tableros</button>

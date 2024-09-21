@@ -1,16 +1,17 @@
+import { useBoard } from "../../hooks/useBoard.ts"
 import { NavLi } from "./NavLi.tsx"
 import { SearchInput } from "./SearchInput.tsx"
 export function Nav(): JSX.Element{
-
+    const {board} = useBoard()
     return <header>
-         <nav className="border-[0.25px] border-gray-400 bg-rose-400 font-bold px-3 py-2 flex justify-between text-sm">
+         <nav className={`border-[0.25px] bg-gradient-to-l from-${board?.color}-600 to-${board?.color}-600 font-bold px-3 py-1 flex justify-between text-sm`}>
         <ul className="flex gap-6 items-center">
             <li>
             <h1 className="font-bold text-xl">Trello-clon</h1>
             </li>
             <NavLi text={"Espacios de trabajo"}/>
             <NavLi text={"Reciente"}/>
-            <li><button className="p-2 bg-gray-400/25 hover:bg-slate-500/25 rounded-sm">Crear</button></li>
+            <li><button className={`p-2 px-1 w-16 bg-${board?'gray-400/50':'blue-600'} hover:bg-slate-500/25 rounded-sm text-white`}>Crear</button></li>
         </ul>
         <ul className="flex gap-6 items-center">
             <li>

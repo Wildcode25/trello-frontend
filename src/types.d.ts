@@ -27,8 +27,11 @@ export interface ErrorDetails{
     path: string,
     message: string
 }
+export interface BoardResponse extends Response{
+    data:Board[]
+}
 export interface Board{
-    id: string
+    id: number
     name: string,
     color: 'rose' | 'blue' | 'green' | 'yellow',
     ownerId: string,
@@ -37,6 +40,10 @@ export interface Board{
 
 }
 export interface List{
+    id?: number,
     name: string,
-    color: string
+    boardId: number
+}
+export interface ListResponse extends Response{
+    data: List
 }

@@ -22,7 +22,7 @@ export function RegisterForm({setPage, page}:Props):JSX.Element{
       <button className="submit" type="submit">Registrarse</button>
     </div>
     <div className="flex gap-4 items-center">
-      <a onClick={()=>setPage(!page)} href="#" className="anchor">¿Ya tienes una cuenta? iniia sesión</a>
+      <a onClick={()=>setPage(!page)} href="#" className="anchor">¿Ya tienes una cuenta? inicia sesión</a>
       
     </div>
     <hr className="bg-gray-400 h-[2px] w-80"/>
