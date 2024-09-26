@@ -15,7 +15,7 @@ export function RegisterForm({setPage, page}:Props):JSX.Element{
         <p className="font-bold text-slate-600 text-m">Registrarse para continuar</p>
     </div>
     <div className="flex-col items-center flex gap-2">
-      <InputForm type="text" placeholder="Introduce un nombre de usuario" value={name} id={"name"}/>
+      <InputForm type="text" placeholder="Introduce tu nombre completo" value={name} id={"name"}/>
       <InputForm type="text" placeholder="Introduce tu correo electronico" value={email} id={"email"}/>
       <InputForm type="password"  placeholder="Introduce tu contraseña" value={password} id={"password"}/>
       <InputForm type="password"  placeholder="Confirmar contraseña" value={confirmPassword} id={"confirmPassword"}/>

@@ -27,8 +27,11 @@ export interface ErrorDetails{
     path: string,
     message: string
 }
+export interface BoardsResponse extends Response{
+    data:Board[]|null
+}
 export interface BoardResponse extends Response{
-    data:Board[]
+    data:Board|null
 }
 export interface Board{
     id: number
@@ -38,6 +41,11 @@ export interface Board{
     workspaceName: string,
     lists: List[]
 
+}
+export interface BoardData{
+    name: string,
+    color: 'rose' | 'blue' | 'green' | 'yellow',
+    workspaceName: string|undefined
 }
 export interface List{
     id?: number,

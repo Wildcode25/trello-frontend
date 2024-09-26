@@ -1,7 +1,7 @@
 import { useBoard } from "../../hooks/useBoard.ts"
 export const Header = ()=>{
     const {board} = useBoard()
-    return <header className={`bg-gradient-to-l from-${board?.color}-600 to-${board?.color}-600  py-3 flex items-center justify-between`}>
+    return <header className={`row-start-1 row-span-1  col-start-2 bg-gradient-to-l from-${board?.color}-800 to-${board?.color}-800  py-3 flex items-center justify-between `}>
     <div className="flex gap-3 px-6 items-center">
     <h2 className="text-xl font-bold">{board?.name}</h2>
     <i className="fi fi-rr-star px-2 py-1 scale-75 hover:bg-gray-400/50"></i>

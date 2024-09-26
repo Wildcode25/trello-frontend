@@ -1,13 +1,15 @@
-import { ChangeEvent, FormEvent, useCallback, useContext, useEffect, useState } from "react";
-import { ListContext } from "../context/List";
-import { useBoard } from "./useBoard";
-import { List } from "../types.ts";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ListContext } from "../context/List.tsx";
+import { useBoard } from "./useBoard.ts";
+import { List } from "../types";
+import { ListService } from "../services/ListService.ts";
 export function useList(){
     const context = useContext(ListContext)
     if(!context) throw new Error('Context Error')
+    const {addList, lists, changeLists} = context
     const {board} = useBoard() 
     const [listData, setListData] = useState<List>({name:'', boardId: 0})
-    const initLists = useCallback(()=>{
+    useEffect(()=>{
         
         if(board){
             console.log(board)
@@ -15,24 +17,23 @@ export function useList(){
             changeLists(board.lists)
         }
     }, [board])
-    useEffect(()=>{
-       if(board) changeLists(board.lists)
-    }, [board])
+   
     const handleChangeListData =(e: ChangeEvent<HTMLInputElement>)=>{
         const {name, value} = e.target
         const newData = {...listData, [name]: value}
         setListData(newData)
     }
-    const handleSubmitListData = (e: FormEvent<HTMLFormElement>)=>{
+    const handleSubmitListData = async (e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         setListData({
             ...listData,
             name: ''
         })
-        if(listData.name!=="") addList(listData)
+        if(listData.name==="") return 
+        const createdList = await ListService.createList(listData)
+        addList(createdList)
     }
-    const {addList, lists, changeLists} = context
     
 
-    return {initLists, listData, addList, lists, changeLists, handleChangeListData, handleSubmitListData}    
+    return { listData, addList, lists, changeLists, handleChangeListData, handleSubmitListData}    
 }

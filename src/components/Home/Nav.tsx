@@ -4,7 +4,7 @@ import { SearchInput } from "./SearchInput.tsx"
 export function Nav(): JSX.Element{
     const {board} = useBoard()
     return <header>
-         <nav className={`border-[0.25px] bg-gradient-to-l from-${board?.color}-600 to-${board?.color}-600 font-bold px-3 py-1 flex justify-between text-sm`}>
+         <nav className={`border-[0.25px] bg-gradient-to-l from-${board?.color}-800 to-${board?.color}-800 font-bold flex justify-between text-sm p-1 px-3`}>
         <ul className="flex gap-6 items-center">
             <li>
             <h1 className="font-bold text-xl">Trello-clon</h1>
