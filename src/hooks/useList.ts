@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { ListContext } from "../context/List.tsx";
 import { useBoard } from "./useBoard.ts";
 import { List } from "../types";
@@ -7,16 +7,8 @@ export function useList(){
     const context = useContext(ListContext)
     if(!context) throw new Error('Context Error')
     const {addList, lists, changeLists} = context
-    const {board} = useBoard() 
     const [listData, setListData] = useState<List>({name:'', boardId: 0})
-    useEffect(()=>{
-        
-        if(board){
-            console.log(board)
-            setListData({...listData, boardId: board.id})
-            changeLists(board.lists)
-        }
-    }, [board])
+   const {board} = useBoard()
    
     const handleChangeListData =(e: ChangeEvent<HTMLInputElement>)=>{
         const {name, value} = e.target
@@ -30,8 +22,10 @@ export function useList(){
             name: ''
         })
         if(listData.name==="") return 
-        const createdList = await ListService.createList(listData)
-        addList(createdList)
+        if(board){
+            const createdList = await ListService.createList({...listData, boardId: board.id})
+            addList(createdList)
+        }
     }
     
 
