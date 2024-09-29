@@ -1,6 +1,4 @@
 import { ChangeEvent, FormEvent, ReactNode } from "react"
-import { useCard } from "../../hooks/useCard"
-import { List } from "../../types"
 
 interface Props { 
     children: ReactNode, 
