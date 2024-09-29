@@ -1,6 +1,7 @@
 import { useBoard } from "../../hooks/useBoard.ts"
 import { NavLi } from "./NavLi.tsx"
 import { SearchInput } from "./SearchInput.tsx"
+import { BoardForm } from "./boardForm.tsx"
 export function Nav(): JSX.Element{
     const {board} = useBoard()
     return <header>
@@ -11,7 +12,16 @@ export function Nav(): JSX.Element{
             </li>
             <NavLi text={"Espacios de trabajo"}/>
             <NavLi text={"Reciente"}/>
-            <li><button className={`p-2 px-1 w-16 bg-${board?'gray-400/50':'blue-600'} hover:bg-slate-500/25 rounded-sm text-white`}>Crear</button></li>
+            <li>
+                <BoardForm position={
+                    {
+                        top: '5px'
+                    }
+                } inputId="toggleFormBoard1">
+
+                <div className={`text-center cursor-pointer p-2 px-1 w-16 bg-${board?'gray-400/50':'blue-600'} hover:bg-slate-500/25 rounded-sm text-white`}>Crear</div>
+                </BoardForm>
+                </li>
         </ul>
         <ul className="flex gap-6 items-center">
             <li>

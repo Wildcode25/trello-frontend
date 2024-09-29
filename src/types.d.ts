@@ -50,8 +50,15 @@ export interface BoardData{
 export interface List{
     id?: number,
     name: string,
-    boardId: number
+    boardId: number,
+    cards?: Card[]
 }
 export interface ListResponse extends Response{
     data: List
+}
+
+export interface Card{
+    id: number,
+    name: string,
+    listId: number
 }
