@@ -58,7 +58,10 @@ export interface ListResponse extends Response{
 }
 
 export interface Card{
-    id: number,
+    id?: number,
     name: string,
-    listId: number
+    listId?: number
+}
+export interface CardResponse extends Response{
+    data: Card
 }

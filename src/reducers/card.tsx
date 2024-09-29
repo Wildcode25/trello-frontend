@@ -12,7 +12,8 @@ export const cardReducer = (state: Card[], action:Action):Card[]=>{
     }
     
     if(action.type === CARD_ACTION_TYPES.ADD_CARD ){
-        const newState = [...state, action.payload]
+        const newState = [...state]
+        newState.push(action.payload)
 
         return newState
     }

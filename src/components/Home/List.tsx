@@ -2,7 +2,7 @@ import { useCard } from "../../hooks/useCard.ts"
 import type { List } from "../../types.d.ts"
 import { CardForm } from "./cardForm.tsx"
 export const ListItem = ({ list }: { list: List }) => {
-    const { cardsState } = useCard(list.cards ? list.cards : [])
+    const { cardsState, handleChangeCardData, handleSubmitCardData, cardData } = useCard(list)
     return <ul className="rounded-xl h-max max-h-full min-w-72 bg-gray-100 text-gray-700 p-2 text-sm flex flex-col gap-2">
         <li className="flex items-center h-8 p-2 justify-between"><b>{list.name}</b>
             <div className="flex gap-6 items-center"> <i className="h-3 rotate-45 fi fi-br-down-left-and-up-right-to-center"></i><i className="fi h-3 fi-rr-menu-dots"></i></div>
@@ -14,7 +14,7 @@ export const ListItem = ({ list }: { list: List }) => {
                 </div>
             </li>
         })}
-            <CardForm>
+            <CardForm inputId={list.id?list.id:0} handleChangeCardData={handleChangeCardData} handleSubmitCardData={handleSubmitCardData} cardData={cardData} >
                 <li className="relative" >
                 
                 <div className="flex items-center h-8 justify-between w-[17rem]">
