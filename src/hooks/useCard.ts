@@ -19,7 +19,13 @@ const useCardReducer = ()=>{
             payload: cards
         })
     }
-    return {initCards, addCard, cardsState}
+    const deleteCard = (card:Card)=>{
+        dispatch(
+           { type: CARD_ACTION_TYPES.REMOVE_CARD,
+            payload: card}
+        )
+    }
+    return {initCards, addCard, cardsState, deleteCard}
 }
 export const useCard = (list: List)=>{
     const {cards, id} = list
@@ -27,7 +33,7 @@ export const useCard = (list: List)=>{
     
     if(!context) throw new Error('Error context')
     const {card, setCard} = context;
-    const {initCards, addCard, cardsState} = useCardReducer()
+    const {initCards, addCard, cardsState, deleteCard} = useCardReducer()
     const [cardData, setCardData] = useState({
         name: '',
         listId: id
@@ -51,6 +57,11 @@ export const useCard = (list: List)=>{
             console.log(createdCard)
             addCard(createdCard)
     }
-    
-    return {cardData, card, setCard, addCard, cardsState, handleChangeCardData, handleSubmitCardData} 
+    const handleDeleteCard = async (e:any)=>{
+       const {cardid} = e.target.dataset
+       console.log(cardid) 
+       const deletedCard = await CardService.deleteCard(cardid)
+        deleteCard(deletedCard)
+    }
+    return {cardData, card, setCard, addCard, cardsState, handleChangeCardData, handleSubmitCardData, handleDeleteCard} 
 }

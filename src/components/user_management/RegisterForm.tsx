@@ -7,7 +7,7 @@ interface Props{
   page: boolean
 }
 export function RegisterForm({setPage, page}:Props):JSX.Element{
-    const { formData, handleRegisterUser}=useForm({page})
+    const { formData, handleRegisterUser, loading}=useForm({page})
     const {email, password, name, confirmPassword} = formData
     return <form onSubmit={handleRegisterUser} className="userManagementForm">
     <div className="flex gap-8 flex-col">
@@ -19,7 +19,7 @@ export function RegisterForm({setPage, page}:Props):JSX.Element{
       <InputForm type="text" placeholder="Introduce tu correo electronico" value={email} id={"email"}/>
       <InputForm type="password"  placeholder="Introduce tu contraseña" value={password} id={"password"}/>
       <InputForm type="password"  placeholder="Confirmar contraseña" value={confirmPassword} id={"confirmPassword"}/>
-      <button className="submit" type="submit">Registrarse</button>
+      <button className="submit " type="submit">{loading? <div className="m-auto load"></div>:'Registrarse' }</button>
     </div>
     <div className="flex gap-4 items-center">
       <a onClick={()=>setPage(!page)} href="#" className="anchor">¿Ya tienes una cuenta? inicia sesión</a>

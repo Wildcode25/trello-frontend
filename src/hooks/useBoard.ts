@@ -3,6 +3,7 @@ import { BoardContext } from "../context/board";
 import { useUser } from "./useUser";
 import type { BoardData } from "../types";
 import { BoardService } from "../services/BoardService";
+import { hideForms } from "../utils/hideForms";
 export function useBoard(){
     const {user} = useUser()
     const [boardData, setBoardData] = useState<BoardData>({
@@ -22,6 +23,7 @@ export function useBoard(){
         const createdboard = await BoardService.createBoard(data)
         setBoard(createdboard)
         setBoardData({...boardData, name: ''})
+        hideForms()
     }
    const  handleChangeInput = (e: ChangeEvent<HTMLInputElement>)=>{
     const {name, value} = e.target
@@ -33,6 +35,7 @@ export function useBoard(){
         if(boardId === board?.id) return
         const newBoard = boards?.find((board)=>board.id===boardId)
         if(newBoard) setBoard(newBoard)
+            hideForms()
     }
 
     return {handleChangeBoard, boards, board, handleChangeInput, handleSubmitBoard, boardData}

@@ -12,7 +12,7 @@ export function Home(): JSX.Element {
         <input id="to" type="radio" name="toggleFormBoard" className="hidden"/>
         
         <input type="radio" name="toggleBar" className="peer/toggleBar hidden" id="toggleBar" checked/>
-        <main className={`grid h-screen grid-cols-[16rem_1fr] peer-checked/toggleBar:-ml-[15rem] group transition-all grid-rows-11 bg-gradient-to-l from-${board?.color}-600 to-${board?.color}-600`}>
+        <main className={` grid h-screen grid-cols-[16rem_1fr] peer-checked/toggleBar:-ml-[15rem] group transition-all grid-rows-11 bg-gradient-to-l from-${board?.color}-600 to-${board?.color}-600`}>
         
             <ListContextProvider>
 

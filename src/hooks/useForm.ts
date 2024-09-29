@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { UserService } from "../services/UserService.ts";
 import { useNotification } from "./useNotification.ts";
 import type { ErrorDetails, UserResponse } from "../types";
@@ -9,6 +9,7 @@ interface Props{
 }
 export function useForm({page}:Props) {
     const {setUser} = useUser()
+    const [loading, setLoading] = useState(false)
     const { setMessage, message } = useNotification()
     const context = useContext(FormContext)
     if(!context) throw new Error('No usar ')
@@ -69,7 +70,9 @@ export function useForm({page}:Props) {
     } 
     async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        setLoading(true)
         const response = await UserService.loginUser(formData)
+        setLoading(false)
         const { data, message, error } = response
         verifyResult({data, message, error})
 
@@ -77,9 +80,11 @@ export function useForm({page}:Props) {
     
     async function handleRegisterUser(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        setLoading(true)
         const response = await UserService.registerUser(formData)
+        setLoading(false)
         const { data, message, error } = response
         verifyResult({data, message, error})
     }
-    return { setformData, formData, handleLoginSubmit, handleRegisterUser, resetFormData }
+    return { setformData, formData, handleLoginSubmit, handleRegisterUser, resetFormData , setLoading, loading }
 }

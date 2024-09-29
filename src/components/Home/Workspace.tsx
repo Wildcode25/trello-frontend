@@ -1,7 +1,7 @@
 import { useUser } from "../../hooks/useUser.ts"
 export const Workspace = ()=>{
     const {user} = useUser()
-    return <article className="p-12 py-4">
+    return <article className="py-4">
         <header className="flex w-[80vw] p-3 py-2 gap-4 justify-center items-center">
         <div className="text-3xl font-bold h-16 px-6 rounded-md py-3 bg-blue-600 text-white">
             {user?.name[0]}
@@ -11,6 +11,6 @@ export const Workspace = ()=>{
         <i className="fi fi-rr-member-search"></i> Invitar miembros del espacio de trabajo
         </button>
         </header>
-        <hr className="bg-gray-400" />
+        <hr className="bg-gray-400/50 h-0.5" />
     </article>
 }

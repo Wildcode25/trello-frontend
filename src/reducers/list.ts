@@ -1,13 +1,15 @@
 import { List } from "../types.ts";
 import { LIST_ACTION_TYPES } from "../consts.ts";
-interface Action{
+type Action = {
     type: string,
-    payload: number | List[]
+    payload: List[]
+} | {
+    type: string,
+    payload: number
 }
 export const listReducer = (state: List[], action: Action)=>{
     if(Array.isArray(action.payload)){
         if(action.type===LIST_ACTION_TYPES.CHANGE_LISTS){
-            console.log("aqui")
             return action.payload
         }
         if(action.type === LIST_ACTION_TYPES.ADD_LIST){
@@ -16,7 +18,16 @@ export const listReducer = (state: List[], action: Action)=>{
 
             return newState
         }
-       
+        
+    }
+    if(action.type === LIST_ACTION_TYPES.REMOVE_LIST){
+        console.log(action.payload)
+        const newState = state.filter((list)=>{
+          
+            return list.id!=action.payload
+        })
+        
+        return newState
     }
     return state
     

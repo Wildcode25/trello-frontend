@@ -17,5 +17,12 @@ export const cardReducer = (state: Card[], action:Action):Card[]=>{
 
         return newState
     }
+    if(action.type === CARD_ACTION_TYPES.REMOVE_CARD){
+        const deletedCard = action.payload
+        const newState = state.filter((card)=>{
+            return card.id !== deletedCard.id
+        })
+        return newState
+    }
     return state
 }

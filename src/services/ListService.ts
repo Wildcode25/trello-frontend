@@ -5,4 +5,7 @@ export class ListService{
         const response:AxiosResponse<ListResponse> = await axios.post('/api/list', list)
         return response.data.data
     }
+    static async deleteList(id: number){
+        await axios.delete(`/api/list/${id}`)
+    }
 }

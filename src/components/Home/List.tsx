@@ -1,17 +1,27 @@
 import { useCard } from "../../hooks/useCard.ts"
 import type { List } from "../../types.d.ts"
 import { CardForm } from "./cardForm.tsx"
+import { FloatingListMenu } from "./floatingListMenu.tsx"
 export const ListItem = ({ list }: { list: List }) => {
-    const { cardsState, handleChangeCardData, handleSubmitCardData, cardData } = useCard(list)
+    const { cardsState, handleChangeCardData, handleSubmitCardData, cardData, handleDeleteCard } = useCard(list)
     return <ul className="rounded-xl h-max max-h-full min-w-72 bg-gray-100 text-gray-700 p-2 text-sm flex flex-col gap-2">
         <li className="flex items-center h-8 p-2 justify-between"><b>{list.name}</b>
-            <div className="flex gap-6 items-center"> <i className="h-3 rotate-45 fi fi-br-down-left-and-up-right-to-center"></i><i className="fi h-3 fi-rr-menu-dots"></i></div>
+            <div className="flex gap-6 items-center"> 
+                <i className="h-3 rotate-45 fi fi-br-down-left-and-up-right-to-center"></i>
+                <FloatingListMenu inputId={`list-${list.id}`} listId={list.id}>
+                <div className="cursor-pointer hover:bg-slate-200 p-2 rounded-md items-center flex">
+                <i className="fi h-3 fi-rr-menu-dots "></i>
+
+                </div>
+                </FloatingListMenu>
+                </div>
         </li>
         {cardsState.map((card)=>{
-            return <li className="flex items-center h-8 p-3 cursor-pointer justify-between bg-white rounded-md shadow-md">
+            return <li className="flex items-center h-8 p-3 justify-between bg-white rounded-md shadow-md">
                 <div>
                     <b> {card.name}</b>
                 </div>
+                <i onClick={handleDeleteCard} data-cardId={card.id} className="fi fi-rr-trash  cursor-pointer"></i>
             </li>
         })}
             <CardForm inputId={list.id?list.id:0} handleChangeCardData={handleChangeCardData} handleSubmitCardData={handleSubmitCardData} cardData={cardData} >
