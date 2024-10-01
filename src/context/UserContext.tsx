@@ -3,7 +3,7 @@ import { User } from "../types.ts";
 import { UserService } from "../services/UserService.ts";
 interface UserContextTypes{
     user: User|null,
-    setUser: (user: User)=>void
+    setUser: (user: User|null)=>void
 }
 export const UserContext = createContext<UserContextTypes|undefined>(undefined)
 

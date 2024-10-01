@@ -1,5 +1,6 @@
 import { useBoard } from "../../hooks/useBoard.js"
 import { useUser } from "../../hooks/useUser.js"
+import { hideForms } from "../../utils/hideForms.js"
 import { AsideItem } from "./AsideItem.js"
 import { BoardForm } from "./boardForm.js"
 export const Aside = ()=>{
@@ -10,11 +11,11 @@ export const Aside = ()=>{
         <div className="text-md font-bold w-8 h-8 px-3 rounded-sm py-1 bg-blue-600 text-white">
             {user?.name[0]}
         </div>
-        <div className="font-bold text-sm">Espacio de trabajo de <p>{user?.name} 
-            <label onClick={()=>{
-                   const input =  document.getElementById('to') as HTMLInputElement
-                   input.checked = true
-            }} className="cursor-pointer px-1 py-1 hover:bg-gray-400/50 rounded-sm " htmlFor="toggleBar"><i className="scale-75  inline-block fi text-sm fi-br-angle-left"></i></label></p> <p className="font-normal">Gratuito</p></div>
+        <div className="font-bold text-sm ">Espacio de trabajo de <p className="flex justify-between">
+            <span>{user?.name}</span>
+            <label onClick={()=>hideForms()} className="cursor-pointer px-1 py-1 hover:bg-gray-400/50 rounded-sm " htmlFor="toggleBar">
+                <i className="scale-75  inline-block fi text-sm fi-br-angle-left"></i>
+            </label></p> <p className="font-normal">Gratuito</p></div>
         </div>
     <ul className="py-3 text-sm">
         <AsideItem><i className=" fi fi-bs-chalkboard"></i>Tableros</AsideItem>

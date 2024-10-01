@@ -19,7 +19,7 @@ export const BoardForm = ({children, inputId, position={
                {children}
                 </label>
             <input type="radio" name="toggleFormBoard" className="hidden peer" id={inputId} />
-            <label htmlFor={inputId} className="peer-checked:block hidden absolute">
+            <label htmlFor={inputId} className="peer-checked:block hidden absolute z-30">
             <form onSubmit={handleSubmitBoard} className={`flex boardForm  flex-col gap-4 w-80 h-64 bg-white rounded-md p-3 absolute bottom-[${bottom}] left-[${left}] right-[${right}] z-20 top-[${top}]`}>
                 <input type="text" className='inputForm w-72 font-semibold text-black' onChange={handleChangeInput} value={boardData.name} name="name" />
                 <div className="flex gap-3">

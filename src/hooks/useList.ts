@@ -30,9 +30,10 @@ export function useList(){
         hideForms()
     }
     const handleDeleteList = async (e: any)=>{
+        hideForms()
         const id = e.target.dataset.listid
         deleteList(id)
-        hideForms()
+        
         await ListService.deleteList(id)
         
     }

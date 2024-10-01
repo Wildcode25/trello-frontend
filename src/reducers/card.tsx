@@ -1,28 +1,32 @@
-import type { Card } from "../types"
+import type { Card } from "../types.ts"
 import { CARD_ACTION_TYPES } from "../consts.ts"
 interface Action {
-    payload: Card|Card[],
+    payload: Card | Card[],
     type: string
 }
 
-export const cardReducer = (state: Card[], action:Action):Card[]=>{
-    if(Array.isArray(action.payload)){
-            
+export const cardReducer = (state: Card[], action: Action): Card[] => {
+    if (Array.isArray(action.payload)) {
+
         return action.payload
     }
-    
-    if(action.type === CARD_ACTION_TYPES.ADD_CARD ){
-        const newState = [...state]
+    if (action.type === CARD_ACTION_TYPES.ADD_CARD) {
+        const card = action.payload
+        const newState = [...state.filter((cardItem)=>{
+            return cardItem.id !== card.id
+        })]
         newState.push(action.payload)
 
         return newState
     }
-    if(action.type === CARD_ACTION_TYPES.REMOVE_CARD){
-        const deletedCard = action.payload
-        const newState = state.filter((card)=>{
-            return card.id !== deletedCard.id
+    if (action.type === CARD_ACTION_TYPES.REMOVE_CARD) {
+
+        const card = action.payload
+        const newState = state.filter((cardItem) => {
+            return cardItem.id !== card.id
         })
         return newState
     }
+    
     return state
 }
