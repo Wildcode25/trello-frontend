@@ -10,7 +10,8 @@ interface ContextTypes{
     deleteCard: (card: Card)=>void,
     cardsState: Card[],
     initCards: (cards: Card[])=>void,
-    listId: number | undefined
+    listId: number | undefined,
+    changeCardOrder: (card:Card)=>void
 }
 
 export const CardsContext = createContext<ContextTypes | undefined>(undefined)
@@ -33,54 +34,33 @@ const useCardReducer = ()=>{
             type: CARD_ACTION_TYPES.REMOVE_CARD,
             payload: card
         })
-    
-    return {initCards, addCard, cardsState, deleteCard}
+    const changeCardOrder = (card: Card)=>dispatch({
+        type: CARD_ACTION_TYPES.CHANGE_CARD_ORDER,
+        payload: card
+    })
+    return {initCards, addCard, cardsState, deleteCard, changeCardOrder}
 }
 export const CardsProvider= ({children, listId}:{children: ReactNode, listId:number|undefined})=>{
-    const {cardsState, initCards, deleteCard, addCard} = useCardReducer()
+    const {cardsState, initCards, deleteCard, addCard, changeCardOrder} = useCardReducer()
     const {lists} = useList()
-    const {card, setCard, setPosition} = useCard()
+    const {isDragging, cardRef} = useCard()
     useEffect(()=>{
         if(listId) CardService.getCards(listId).then(cards=>{
             initCards(cards)
         })
     }, [lists])
     useEffect(()=>{
-        if(card) document.addEventListener('mouseup', handleDropCard)
-    },[card])
-    
-   
-    const handleDropCard=({target}:any)=>{
-       
-        console.log(card)
-        if(card){
-            if(target.classList.contains('listEnvelope')&&card.listId===listId){
-                addCard(card)
-            }else{
-                if(target.classList.contains('listContainer')) {
-
-                }
-                deleteCard(card)
-            } 
-            setCard(null)
-            setPosition({
-                x: 0,
-                y: 0
-            })
-            
-            
+        if(!isDragging) if(cardRef.current){
+            if(cardRef.current.listId !== listId) deleteCard(cardRef.current)
         }
-        document.removeEventListener('mouseup', handleDropCard)
-        
-    }
-    
-   
+    }, [isDragging])
     return <CardsContext.Provider value={{
         cardsState,
         initCards,
         deleteCard,
         addCard,
-        listId
+        listId,
+        changeCardOrder
     }}>
         {children}
     </CardsContext.Provider>

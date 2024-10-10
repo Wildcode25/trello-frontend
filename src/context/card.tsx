@@ -5,15 +5,18 @@ interface PositionCard{
     y: number
 }
 interface ContextTypes{
-    card: Card | null,
-    setCard: (card:Card|null)=>void
+    cardRef: {current: Card | null},
     positionCard: PositionCard,
     setPosition: (position: PositionCard)=>void,
-    positionCardRef: {current: PositionCard}
+    positionCardRef: {current: PositionCard},
+    isDragging: boolean,
+    setDragging: (isDragging: boolean) => void
 }
 export const CardContext = createContext<ContextTypes|undefined>(undefined)
 
 export const CardProvider = ({children}:{children:ReactNode})=>{
+    const cardRef = useRef<Card|null>(null)
+
     const positionRef = useRef({
         x: 0,
         y:0
@@ -22,41 +25,43 @@ export const CardProvider = ({children}:{children:ReactNode})=>{
         x: 0,
         y: 0
     })
-    
+   
     const handleMove = (e: PointerEvent|any)=>{
             
         const {clientX, clientY, offsetX, offsetY} = e
-        if(e.target.classList.contains('card-item')) positionRef.current = {
-            x: offsetX,
-            y: offsetY
+        if(!isDragging&&e.target.classList.contains('card-item')){
+            
+            positionRef.current = {
+                x: offsetX,
+                y: offsetY
+            }
         }
+       
         const newPosition = {x:0, y:0}
         newPosition.x = clientX-positionRef.current.x
         newPosition.y = clientY-positionRef.current.y
         
         setPosition(newPosition)
 
-        if(card && e?.target?.classList.contains('listEnvelope')){
-            const newCard = {...card, listId:parseInt( e.target.dataset.listid)}
-            setCard(newCard)
-        }
+       
        
     }
     
     
-    const [card, setCard] = useState<Card|null>(null)
+    const [isDragging, setDragging] = useState(false)
     useEffect(()=>{
         window.addEventListener('pointermove', handleMove)
         return ()=>{
             window.removeEventListener( 'pointermove',handleMove)
         }
-    },[card])
+    },[isDragging])
     return <CardContext.Provider value={
-        {card,
-        setCard,
+        {cardRef,
+        isDragging,
         positionCard: position,
         setPosition,
-        positionCardRef: positionRef
+        positionCardRef: positionRef,
+        setDragging
     }
     }>
         {children}

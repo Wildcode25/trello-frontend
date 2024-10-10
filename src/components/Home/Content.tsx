@@ -9,7 +9,7 @@ export function Content():JSX.Element{
     return<>
     
         <Header/>
-        <div className={`col-start-2 row-end-[-2] row-start-2 flex h-full gap-3 p-3 overflow-auto scrollbar`}>
+        <div className={`max-w-min col-start-2 row-end-[-2] md:row-start-2 row-start-3 flex gap-3 p-3 overflow-auto scrollbar`}>
         <CardProvider>
        {lists.map((list)=>{
        return <CardsProvider listId={list.id}>

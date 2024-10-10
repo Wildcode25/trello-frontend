@@ -14,4 +14,7 @@ export class CardService{
         const response:AxiosResponse<CardResponse> = await axios.delete(`/api/card/${cardId}`)
         return response.data.data
     }
+    static async updateCard(card: Card){
+        await axios.put(`/api/card/${card.id}`, card)
+    }
 }

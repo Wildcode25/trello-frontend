@@ -7,7 +7,7 @@ export const useCard = ()=>{
 
     const context = useContext(CardContext)
     if(!context) throw new Error('Error context')
-    const {card, setCard, positionCard, setPosition} = context;
+    const {cardRef, positionCard, setPosition, positionCardRef, setDragging, isDragging} = context;
     
     const [space, setSpace] = useState(false)
     
@@ -16,7 +16,9 @@ export const useCard = ()=>{
         space, 
         positionCard, 
         setPosition, 
-        card, 
-        setCard, 
+        cardRef,  
+        positionCardRef,
+        isDragging,
+        setDragging
     } 
 }
